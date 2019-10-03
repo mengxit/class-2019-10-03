@@ -1,0 +1,24 @@
+---
+title: "Practice"
+author: "Mengxi Tan"
+date: "10/3/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(googlesheets4)
+library(tidyverse)
+
+```
+
+```{r setup, echo=FALSE}
+
+x <-read_sheet("1LtupNx8yBeJzK6UyGkZ5u-aUAPzU90K9C4r2RTJwWqg")
+
+
+cold_call <- function(){
+  sample_n(x,1)[1,1]
+}
+```
