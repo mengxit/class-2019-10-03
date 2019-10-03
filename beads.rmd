@@ -9,18 +9,20 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 
 library(googlesheets4)
+library(ggplot2)
 library(tidyverse)
 
 ```
 
-```{r setup, echo=FALSE}
+```{r main, echo=FALSE}
 
-x <-read_sheet("1LtupNx8yBeJzK6UyGkZ5u-aUAPzU90K9C4r2RTJwWqg")
+x1 <-read_sheet("1cgP-e6THVfiW5TJ95QhX3jkNxKvc8Sicp9k_BkSRd2I")
 sheets_deauth() #access public resrouce with no google sign-in required
 
-cold_call <- function(){
-  sample_n(x,1)[1,1] #add return to function when assigning to value
-}
-
+clean_data <- x1 %>%
+   filter(!is.na(red)) %>%
+   mutate(red_percent = red/(red + white))
+   
+ggplot(data = clean_data, aes(x = red_percent)) + geom_histogram()
 
 ```
